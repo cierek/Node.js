@@ -1,6 +1,7 @@
 /**
  * AWS Lambda function to delete AMI backup images and associated snapshots
  * This script just creates AMIs and tags them
+ * Official documentation: https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeInstances-property
  */
 var settings = {
   'region': 'eu-west-2', // if you get an error like "region not found" or not supported remove the last letter the original region was eu-west-2a
@@ -41,11 +42,13 @@ exports.handler = function (event, context) {
             }
           }
           console.log('Creating AMIs of the Instance: ', name)
+          //preparing the name of the AMI
           var imageparams = {
             InstanceId: instanceid,
             Name: name + '_' + date + '_' + hours + '-' + minutes,
             NoReboot: settings.noreboot
           }
+          //AMI creation
           ec2.createImage(imageparams, function (err, data) {
             if (err) console.log(err, err.stack)
             else {
