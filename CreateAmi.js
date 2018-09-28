@@ -1,6 +1,6 @@
 /**
  * AWS Lambda function to delete AMI backup images and associated snapshots
- * To be used in conjunction with delete_amis.js 
+ * This script just creates AMIs and tags them
  */
 var settings = {
   'region': 'eu-west-2', // if you get an error like "region not found" or not supported remove the last letter the original region was eu-west-2a
